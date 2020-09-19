@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>URI Bug</title>
+  </head>
+  <body>
+    <h1>URI Bug</h1>
+    <p>
+      This Netlify app has a catch-all rewrite:<br />
+      /files/* /index.html 200
+    </p>
+    <p>
+      But there is no force, so shadowing should still work. And it does work
+      for our link with no encoded characters:
+      <a href="/files/[myfile].html">/files/[myfile].html</a>
+    </p>
+    <p>
+      But it does <bold>not</bold> work for our links with encoded square
+      brackets, encoded space, or unencoded space:
+    </p>
+    <ul>
+      <li>
+        <a href="/files/%5Bmyfile%5D.html">/files/%5Bmyfile%5D.html</a>
+      </li>
+      <li>
+        <a href="/files/my%20file.html">/files/my%20file.html</a>
+      </li>
+      <li>
+        <a href="/files/my file.html">/files/my file.html</a>
+      </li>
+    </ul>
+    <p>
+      The links all work when there is no redirect (as they should!). Here are
+      these same three links, but this time pointing to the /other/ folder
+      (where the redirect does not apply):
+    </p>
+    <ul>
+      <li>
+        <a href="/other/%5Bmyfile%5D.html">/other/%5Bmyfile%5D.html</a>
+      </li>
+      <li>
+        <a href="/other/my%20file.html">/other/my%20file.html</a>
+      </li>
+      <li>
+        <a href="/other/my file.html">/other/my file.html</a>
+      </li>
+    </ul>
+    <p>
+      This error exists on both netlify.app as well as in netlify-cli. For
+      netlify-cli, the fix is to wrap the reqUrl.pathname in the proxy.js file
+      inside decodeURIComponent():
+      <a
+        href="https://github.com/netlify/cli/blob/c4ce6bba298ab3c7deb0d5b409e9c36ff21fd3da/src/utils/proxy.js#L149"
+      >
+        https://github.com/netlify/cli/blob/c4ce6bba298ab3c7deb0d5b409e9c36ff21fd3da/src/utils/proxy.js#L149 </a
+      >. I'll let you figure out the fix for netlify.app :)
+    </p>
+  </body>
+</html>
