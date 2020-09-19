@@ -1,1 +1,0 @@
-_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[4],{"91Zj":function(n,_,u){"use strict";u.r(_),u.d(_,"__N_SSG",(function(){return o}));var o=!0;_.default=function(){return null}},"GZg/":function(n,_,u){(window.__NEXT_P=window.__NEXT_P||[]).push(["/[...slug]",function(){return u("91Zj")}])}},[["GZg/",0]]]);

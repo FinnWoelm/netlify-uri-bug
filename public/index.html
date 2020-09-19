@@ -45,14 +45,8 @@
       </li>
     </ul>
     <p>
-      This error exists on both netlify.app as well as in netlify-cli. For
-      netlify-cli, the fix is to wrap the reqUrl.pathname in the proxy.js file
-      inside decodeURIComponent():
-      <a
-        href="https://github.com/netlify/cli/blob/c4ce6bba298ab3c7deb0d5b409e9c36ff21fd3da/src/utils/proxy.js#L149"
-      >
-        https://github.com/netlify/cli/blob/c4ce6bba298ab3c7deb0d5b409e9c36ff21fd3da/src/utils/proxy.js#L149 </a
-      >. I'll let you figure out the fix for netlify.app :)
+      This error exists only in netlify-cli. Everything works correctly on
+      netlify.app.
     </p>
   </body>
 </html>
